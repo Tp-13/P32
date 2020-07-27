@@ -5,9 +5,13 @@ const Constraint = Matter.Constraint;
 
 var gameState = "onSling";
 var score = 0;
+var backgroundIMG;
 
 function setup() {
   createCanvas(1200,400);
+
+  getTime();
+
   engine = Engine.create();
   world = engine.world;
 
@@ -107,7 +111,9 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  if(backgroundIMG){
+    background(backgroundIMG);
+  }
   Engine.update(engine);
   ellipseMode(RADIUS);
   rectMode(CENTER);
@@ -273,9 +279,9 @@ async function getTime(){
   var time = responseJSON.datetime;
   var hour = time.slice(11,13);
   if (hour >= 06 && hour<= 18){
-      background = "white";
+      backgroundIMG = 255;
   }
   else{
-      background = "black";
+      backgroundIMG = 0;
   }
 }
